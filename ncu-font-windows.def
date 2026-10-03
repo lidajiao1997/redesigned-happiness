@@ -1,0 +1,13 @@
+%% ncu-font-windows.def —— Windows 系统字体（中易宋体/黑体/楷体/仿宋）
+%% 由 ncubachelor.cls 在 fontset=windows 时加载
+\ProvidesFile{ncu-font-windows.def}[2026/10/02 v1.1.0 Windows CJK fonts (ncubachelor)]
+
+\setCJKmainfont [AutoFakeBold=2.5, AutoFakeSlant] {SimSun}
+\setCJKsansfont [AutoFakeBold=2.5, AutoFakeSlant] {SimHei}
+\setCJKmonofont [AutoFakeBold=2.5, AutoFakeSlant] {FangSong}
+\newCJKfontfamily \songti   [AutoFakeBold=2.5, AutoFakeSlant] {SimSun}
+\newCJKfontfamily \heiti    [AutoFakeBold=2.5, AutoFakeSlant] {SimHei}
+\newCJKfontfamily \kaishu   [AutoFakeBold=2.5, AutoFakeSlant] {KaiTi}
+\newCJKfontfamily \fangsong [AutoFakeBold=2.5, AutoFakeSlant] {FangSong}
+\ncu@settimes
+\endinput

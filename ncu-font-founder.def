@@ -1,0 +1,15 @@
+%% ncu-font-founder.def —— 方正字库（书宋/黑体/楷体/仿宋，出版排版常用）
+%% 由 ncubachelor.cls 在 fontset=founder 时加载
+\ProvidesFile{ncu-font-founder.def}[2026/10/02 v1.1.0 FounderType CJK fonts (ncubachelor)]
+
+\setCJKmainfont [BoldFont=FZHei-B01, AutoFakeSlant] {FZShuSong-Z01}
+\setCJKsansfont [AutoFakeBold=2.5] {FZHei-B01}
+\setCJKmonofont [AutoFakeBold=2.5, AutoFakeSlant] {FZFangSong-Z02}
+\newCJKfontfamily \songti   [BoldFont=FZHei-B01, AutoFakeSlant] {FZShuSong-Z01}
+\newCJKfontfamily \heiti    [AutoFakeBold=2.5] {FZHei-B01}
+\IfFontExistsTF {FZKai-Z03}
+  { \newCJKfontfamily \kaishu {FZKai-Z03} }
+  { \newCJKfontfamily \kaishu [AutoFakeBold=2.5, AutoFakeSlant] {FZShuSong-Z01} }
+\newCJKfontfamily \fangsong [AutoFakeBold=2.5, AutoFakeSlant] {FZFangSong-Z02}
+\ncu@settimes
+\endinput

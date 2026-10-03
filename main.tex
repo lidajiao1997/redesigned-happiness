@@ -1,0 +1,353 @@
+%% =====================================================================
+%% 这是 main.tex —— 南昌大学本科生毕业设计（论文）模板【统一版 v1.2.4】
+%% 编译：xelatex -> biber -> xelatex -> xelatex
+%%       （v1.2.0 起参考文献改用 biblatex + biber，不再用 BibTeX）
+%% ---------------------------------------------------------------------
+%% 页面方案由类选项选择，同一套 ncubachelor.cls：
+%%
+%% · 默认（无选项）—— 单面打印版：
+%%     页眉为当前章标题，居中，页眉线为文武线；章首页（含目录、
+%%     摘要、声明、参考文献、附录等）一律 plain：无页眉，页码居中页脚。
+%% · official（本示例所用）—— 官方样张版式：
+%%     复刻 v1.1.5 锁定版：页眉章名居中 + 0.5pt 单横线，页码居中于
+%%     页脚；各部分首页同样显示页眉（官方样张“全程有页眉”）。
+%%     official 只决定页眉方案，可与 twoside / openright 叠加，例如
+%%     双面印刷的规范组合（v1.2.2 起支持）：
+%%       [official,twoside,openright]
+%%     —— 双面装订、各构成要素奇数开页，但章首页仍 fancy（有页眉），
+%%        不用 plain；空白填充页仍无页眉页脚。
+%% · ncuhead —— 双面装订版（隐含 twoside 与 openright）：
+%%     · 奇数页（右页）内侧：当前章标题
+%%     · 偶数页（左页）内侧：南昌大学本科生毕业论文
+%%     · 页码位于外侧：偶数页 LE、奇数页 RO
+%%     · 页眉线为文武线（上粗下细双线）
+%%     · 章首页及各部分首页一律 plain：无页眉，页码居中于页脚
+%%     · 双面装订偏移默认 5mm（bindingoffset 可改，0mm 关闭）
+%%     · 论文的全部构成要素一律“视为章”，从纸张正面（奇数物理页）
+%%       开始，必要时自动补一张不编页码的空白页（见下）
+%% ---------------------------------------------------------------------
+%% 构成要素奇数开页（openright 开启时生效：ncuhead 隐含开启；
+%% official,twoside,openright 组合同样生效）：
+%%   声明、中文摘要、英文摘要、目录、正文各章、结论、参考文献、
+%%   附录、致谢 —— 每一个都另起纸张正面；若上一要素恰好结束在纸张
+%%   正面（奇数物理页），则在其后补一张不显示页码、页眉页脚的空白页
+%%   （空白页仍计入页数）。因此封面之后会有若干空白页，例如：
+%%     1 封面（正）  2 空白（背）
+%%     3 声明（正）  4 空白（背）
+%%     5 中文摘要（正） 6 空白（背）
+%%     7 英文摘要（正） 8 空白（背）
+%%     9 目录（正） 10 空白（背）
+%%    11 正文第 1 章 …
+%%   若希望要素紧接上一页、不补空白页，加 openany 关闭（见下）。
+%% =====================================================================
+\documentclass[official]{ncubachelor}
+%% 参考文献数据库（v1.2.0 起用 biblatex 的 \addbibresource，
+%% 取代旧的 \bibliography；文献列表在正文用 \printbibliography 输出）
+%% 注意：文献后端是 biber（不是 bibtex）——编译链见 README 或 build.bat。
+%% 若正文误写成旧写法 \bibliography{references}，v1.2.3 起会被接管并给
+%% 中文提示（它不会像以前那样让文献表整个消失）。
+\addbibresource{references.bib}
+%% 常用类选项（可叠加，方括号内逗号分隔；official / ncuhead 为页眉
+%% 方案、二选一后写者优先；twoside / openright 只管纸张，可任意叠加）：
+%%   official       官方样张版式（本示例所用）：复刻 v1.1.5——页眉章名
+%%                  居中 + 0.5pt 单横线，页码居中页脚，各部分首页同样
+%%                  显示页眉；可与 twoside/openright 叠加（见上）
+%%   ncuhead        另用版双面页眉（见上），隐含 twoside 与 openright
+%%   twoside        双面打印（奇偶页眉在外侧显示章名，复旦思路），
+%%                  并启用对称的内外侧边距与“空偶数页不显示页眉”
+%%   openright      各构成要素从纸张正面（奇数页）开始（ncuhead 已隐式开启）
+%%   openany        取消奇数开页：要素紧接上一页，不补空白页
+%%   bindingoffset= 装订偏移（twoside 下默认 5mm，偶数页自动交替到内侧）
+%%   blindreview    盲审版：封面/摘要中的姓名、学号、导师自动替换为 ***，
+%%                  并清除 PDF 元数据中的作者信息（可与其他选项叠加）
+%%   fontset=...    字体方案：auto(默认,自动探测)/windows/mac/founder/adobe/fandol/none
+%%   tocdots        目录显示点线（v1.1.5 起默认开启，tocdots=false 关闭）
+
+%% ---------------------------------------------------------------------
+%% 一、论文元信息（按实际填写）
+%% ---------------------------------------------------------------------
+\ncusetup{
+  info = {
+    secret-level     = {公开},
+    title            = {南昌大学本科生毕业论文模板使用演示},
+    title*           = {Demonstration of the Nanchang University\\Undergraduate Thesis Template},
+    college          = {物理},
+    department       = {力学},
+    major-class      = {物理学 2023 班},
+    major            = {物理学},
+    author           = {张三},
+    studentid        = {402230220001},
+    supervisor       = {李四},
+    supervisor-title = {教授},
+    start-date       = {23},
+    stop-date        = {27},
+    start-stop-date  = {2023 年 9 月—2027 年 6 月}
+  }
+}
+
+%% ---------------------------------------------------------------------
+%% 二、模板细节配置（可选，默认值如下）
+%% ---------------------------------------------------------------------
+%% 盲审细节（配合 blindreview 类选项）：
+%%   blind = {
+%%     text = {***},                  %% 遮蔽占位文本
+%%     hide-acknowledgement = true,   %% 同时省略致谢页
+%%   }
+%% 定理环境样式：
+%%   theorem = {
+%%     header-font = \songti\bfseries,  %% 头部字体
+%%     within      = chapter,           %% 编号锚点：chapter / section / none
+%%   }
+%%   proof = { qed = $\blacksquare$ }  %% 证明结束符
+
+%% ---------------------------------------------------------------------
+%% 三、其他宏包与自定义设置（按需添加）
+%% ---------------------------------------------------------------------
+% \usepackage{siunitx}
+% \usepackage{algorithm,algorithmicx,algpseudocode}
+% \usepackage{listings}
+
+\usepackage{lipsum,zhlipsum}
+
+%% ---------------------------------------------------------------------
+%% 三、文档开始
+%% ---------------------------------------------------------------------
+\begin{document}
+
+%% 封面（无页眉页脚）
+\maketitle
+
+%% 原创性申明与授权书（无页眉页脚）
+\makedecaut
+
+%% 前置部分：页码从中文摘要起用罗马数字 I, II, III …
+\frontmatter
+
+%% 中文摘要
+\begin{abstract}
+这是中文摘要。摘要应扼要说明研究目的、方法、结果和结论，
+内容为小四号宋体、两端对齐、行距 1.35 倍、行首缩进 2 个汉字字符。
+
+如果摘要较长，可以分段书写，也可以写到第二页。
+
+本文得到了国家自然科学基金项目的资助。
+\keywords{南昌大学；毕业论文；\LaTeX{} 模板}
+\end{abstract}
+
+%% 英文摘要
+\begin{abstract*}
+This is the English abstract. It should state briefly the purpose,
+methods, results and conclusions of the research.
+
+If the abstract is long enough, it may occupy more than one page.
+
+This work was supported by the National Natural Science Foundation
+of China.
+\keywords{Nanchang University; bachelor thesis; \LaTeX{} template}
+\end{abstract*}
+
+%% 目录
+\tableofcontents
+
+%% ---------------------------------------------------------------------
+%% 正文：页码从第一章起改用阿拉伯数字 1, 2, 3 …
+%% ---------------------------------------------------------------------
+\mainmatter
+
+\chapter{引言}\label{chap:intro}
+
+%% 若论文源于科研项目，可在正文第一页用无编号脚注标注项目来源
+\blfootnote{本论文来源于科研项目“基于 \LaTeX{} 的本科毕业设计”，项目编号 1124。}
+
+\section{研究背景与意义}\label{sec:background}
+
+我们知道 lshort\cite{lshortcn} 是入门 \LaTeX{} 的必读文献。
+可以花上几个小时阅读一下，能够避免被一些简单的问题耽误时间。
+除此之外，还推荐刘海洋的《\LaTeX{} 入门》。
+
+在社交媒体的强覆盖下，新闻信息的传播渠道也悄然发生了变化。
+根据美国皮尤研究中心的调查结果\cite{pew}，社交媒体正在成为网络上
+热点事件生成并发酵的源头，国内较为知名的新浪微博\footnote{本脚注
+为小五号宋体，仅作排版示例。}即是典型代表。
+
+\section{本文工作}
+
+本文的主要工作如下：
+\begin{enumerate}
+  \item 依据《南昌大学本科生毕业设计（论文）书写式样》实现了
+        封面、申明与授权书、中英文摘要、目录、正文、参考文献与致谢
+        的自动排版；
+  \item 提供了三线表、定理类环境、脚注等常用排版要素；
+  \item 通过示例演示了模板的用法。
+\end{enumerate}
+
+\zhlipsum[3-7]
+
+%% ---------------------------------------------------------------------
+\chapter{图表与公式}\label{chap:figtab}
+
+\section{表格}
+
+表格标题置于表的上方，五号宋体加粗居中，表序与表名之间空一个汉字宽度；
+表格内容为五号宋体，行距 1.35。表~\ref{tab:demo} 给出了一个三线表示例。
+
+\begin{table}[htb]
+  \centering
+  \caption{用不同技术得到的带隙温度系数、$E_{g0}$、$\alpha$ 和 $T_0$ 的值}
+  \label{tab:demo}
+  \begin{tabular}{llccccc}
+    \thickhline
+    样品类型 & 实验方法 & $\mathrm{d}E_g/\mathrm{d}T$ (eV/K) &
+    $E_{g0}$(eV) & $\alpha$ (eV/K) & $T_0$(K) & 文献 \\
+    \hline
+    GaN/Al$_2$O$_3$ & 光致发光 & $-5.32\times 10^{-4}$ & 3.503 &
+    $5.08\times 10^{-4}$ & $-996$ & 61 \\
+    GaN/Al$_2$O$_3$ & 光致发光 & —                      & 3.489 &
+    $7.32\times 10^{-4}$ & 700   & 59 \\
+    GaN/Al$_2$O$_3$ & 光吸收   & $-4.5\times 10^{-4}$   & $\sim$3.471 &
+    $-9.3\times 10^{-4}$ & 772   & 63 \\
+    \thickhline
+  \end{tabular}
+\end{table}
+
+\section{插图}
+
+图标题置于图的下方，五号宋体加粗居中，图序与图名之间空一个汉字宽度。
+图~\ref{fig:demo} 给出了示例。请注意，浮动体不一定会留在插入位置，
+因此不要使用“下图”“下表”这类表述，应使用“如图 1-1 所示”。
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=.55\textwidth]{example-image}
+  \caption{热风速计原理}
+  \label{fig:demo}
+\end{figure}
+
+\section{公式}
+
+对 Fourier 变换采用以下约定：
+\begin{equation}
+  (\mathcal{F}f)(\xi) = \hat{f}(\xi)
+    = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty}
+      \mathrm{e}^{-ix\xi}f(x)\,\mathrm{d}x.
+  \label{eq:fourier}
+\end{equation}
+根据这一标准定义，有
+\[
+  \lVert\hat{f}\rVert_{L^2} = \lVert f\rVert_{L^2},
+  \qquad
+  |\hat{f}(\xi)| \le (2\pi)^{-1/2}\lVert f\rVert_{L^1}.
+\]
+式~\eqref{eq:fourier} 中的积分顺序可以互换。
+
+\section{定理类环境}
+
+\begin{definition}[排版系统]
+排版系统是把文字、公式、图表按规范组织成文档的软件系统。
+\end{definition}
+
+\begin{theorem}[可编译性]
+只要元信息填写完整，本模板即可通过 XeLaTeX 顺利编译。
+\end{theorem}
+
+\begin{proof}
+即得易见平凡，仿照上例显然。留作习题答案略，读者自证不难。
+反之亦然同理，推论自然成立。略去过程 QED，由上可知证毕。
+\end{proof}
+
+\begin{lemma}
+模板还提供引理、推论、命题、公理、假设、性质、注解等环境，
+编号格式统一为“章.序”。
+\end{lemma}
+
+\begin{example}
+在 \LaTeX{} 中书写“例”环境：本段文字即“例”环境的正文内容。
+\end{example}
+
+\begin{remark}
+定理与证明的头部字体、编号锚点、证明结束符均可通过
+\verb|\ncusetup{theorem=...}| 与 \verb|\ncusetup{proof=...}| 调整。
+\end{remark}
+
+\zhlipsum[3-7]
+
+\section{双面页眉与页码（另用版演示）}
+
+本节用于演示 \verb|ncuhead| 选项的双面页眉效果。本示例各章篇幅较短，
+本节特意多写几段，使之后仍有余页，从而在纸张正反面各能看到一种完整的
+页眉形态，便于对照检查。
+
+偶数页（纸张背面，即左手页）的页眉内侧为“南昌大学本科生毕业论文”，
+页码位于外侧左上角；奇数页（纸张正面，即右手页）的页眉内侧为当前章标题
+（如“第二章　图表与公式”），页码位于外侧右上角；页眉线为文武线
+（上粗下细的双线）。各部分的首页——章、目录、摘要、声明、参考文献、
+附录——一律采用标准 plain 样式：不出现页眉，页码居中于页脚。
+
+正文的页面设置、行距、首行缩进、图表与公式格式均与本模板单面版完全一致，
+唯一的差别是页眉页脚与内外侧边距按纸张正反面自动交替。论文的全部构成要素
+——声明、中文摘要、英文摘要、目录、正文各章、结论、参考文献、附录、致谢
+——在本模板中一律“视为章”，都从纸张正面（奇数物理页）开始；若上一要素
+恰好结束在纸张正面，则自动补一张不显示页码与页眉页脚的空白页（空白页仍
+计入页数）。如需让要素紧接上一页、不补空白页，在类选项中加 \verb|openany|。
+
+（以下段落为版面填充文字，可整段删除。）
+
+页码的奇偶与纸张正反面始终保持一致：双面模式下，页码重新编号前会先做
+纸张奇偶校准——若当前页落在纸张背面，则自动补一张空白页，使重新编号后
+的首页落在纸张正面。否则内外侧边距、装订偏移与页眉的奇偶会与实际纸张
+正反面相反。
+
+装订偏移默认 5\,mm（A4 胶装通用值），偶数页自动交替到纸张内侧。若需要
+调整，可使用 \verb|bindingoffset=8mm| 之类的选项；设为 \verb|0mm| 则关闭。
+装订偏移消耗的宽度从版心中扣除，因此版心宽度、页眉线长度都会相应变化。
+
+页眉文字与页码均为五号宋体（数字使用 Times New Roman），与官方《书写式样》
+“页眉：中文宋体，五号”的要求一致。页码在正文起始处重新从 1 开始编号，
+前置部分（中英文摘要、目录）使用罗马数字。
+
+本页之后的页面即可看到奇数页页眉（本章标题在左、页码在右），再下一页
+则为偶数页页眉（页码在左、“南昌大学本科生毕业论文”在右）。
+
+若某处需要取消页眉（例如插图页、整页表格），可在该处使用
+\verb|\thispagestyle{plain}|；若需要空白页不显示页眉页脚，可使用
+\verb|\thispagestyle{empty}|。
+
+模板的页眉内容取自 \verb|\leftmark|，因此章标题、无编号章标题（结论、
+致谢）、参考文献标题都会自动进入页眉，无需手工设置。
+
+（演示文字至此结束。）
+
+%% ---------------------------------------------------------------------
+\unnumberedchapter{结论}
+
+\zhlipsum[3-7]
+
+结论一般不参与章节编号，但要进目录并出现在页眉中，
+因此这里使用无编号章命令 \verb|\unnumberedchapter{结论}|。
+
+本章总结全文的主要工作与不足，并对后续研究进行展望。
+
+%% ---------------------------------------------------------------------
+\appendix
+\chapter{附加材料}\label{chap:appendix}
+
+附录与正文的章节标题用法没有区别，仅编号方式不同（附录 A、附录 B）。
+
+%% ---------------------------------------------------------------------
+%% 后置部分
+%% ---------------------------------------------------------------------
+\backmatter
+
+\zhlipsum[3-5]
+
+%% 参考文献（biblatex：\addbibresource 在导言区指定数据库）
+\printbibliography
+
+%% 致谢
+\begin{acknowledgements}
+\zhlipsum[3,5]
+\signoff{张三}{2027 年 6 月}
+\end{acknowledgements}
+
+\end{document}
+%% 结束

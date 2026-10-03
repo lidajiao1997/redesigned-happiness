@@ -1,0 +1,13 @@
+%% ncu-font-fandol.def —— Fandol 字库（随 TeX 发行版安装，任何平台可用）
+%% 由 ncubachelor.cls 在 fontset=fandol 时加载（自动探测的兜底方案）
+\ProvidesFile{ncu-font-fandol.def}[2026/10/02 v1.1.0 Fandol CJK fonts (ncubachelor)]
+
+\setCJKmainfont [AutoFakeBold=2.5, AutoFakeSlant] {FandolSong-Regular.otf}
+\setCJKsansfont [AutoFakeBold=2.5, AutoFakeSlant] {FandolHei-Regular.otf}
+\setCJKmonofont [AutoFakeBold=2.5, AutoFakeSlant] {FandolFang-Regular.otf}
+\newCJKfontfamily \songti   [AutoFakeBold=2.5, AutoFakeSlant] {FandolSong-Regular.otf}
+\newCJKfontfamily \heiti    [AutoFakeBold=2.5, AutoFakeSlant] {FandolHei-Regular.otf}
+\newCJKfontfamily \kaishu   [AutoFakeBold=2.5, AutoFakeSlant] {FandolKai-Regular.otf}
+\newCJKfontfamily \fangsong [AutoFakeBold=2.5, AutoFakeSlant] {FandolFang-Regular.otf}
+\setmainfont {TeX~Gyre~Termes}
+\endinput

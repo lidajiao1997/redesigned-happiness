@@ -1,0 +1,16 @@
+%% ncu-font-adobe.def —— 思源字库（Source Han Serif/Sans，Adobe 开源）
+%% 楷体优先使用霞鹜文楷（LXGW WenKai，开源）；无则用宋体斜体替代
+%% 由 ncubachelor.cls 在 fontset=adobe 时加载
+\ProvidesFile{ncu-font-adobe.def}[2026/10/02 v1.1.0 Source Han CJK fonts (ncubachelor)]
+
+\setCJKmainfont [BoldFont=Source~Han~Serif~SC~Bold] {Source~Han~Serif~SC}
+\setCJKsansfont [BoldFont=Source~Han~Sans~SC~Bold] {Source~Han~Sans~SC}
+\setCJKmonofont [AutoFakeBold=2.5, AutoFakeSlant] {Source~Han~Serif~SC}
+\newCJKfontfamily \songti [BoldFont=Source~Han~Serif~SC~Bold] {Source~Han~Serif~SC}
+\newCJKfontfamily \heiti  [BoldFont=Source~Han~Sans~SC~Bold] {Source~Han~Sans~SC}
+\IfFontExistsTF {LXGW~WenKai}
+  { \newCJKfontfamily \kaishu {LXGW~WenKai} }
+  { \newCJKfontfamily \kaishu [AutoFakeBold=2.5, AutoFakeSlant] {Source~Han~Serif~SC} }
+\newCJKfontfamily \fangsong [AutoFakeBold=2.5, AutoFakeSlant] {Source~Han~Serif~SC}
+\ncu@settimes
+\endinput

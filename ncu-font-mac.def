@@ -1,0 +1,17 @@
+%% ncu-font-mac.def —— macOS 系统字体（宋体-简/苹方/楷体-简/华文仿宋）
+%% 由 ncubachelor.cls 在 fontset=mac 时加载
+\ProvidesFile{ncu-font-mac.def}[2026/10/02 v1.1.0 macOS CJK fonts (ncubachelor)]
+
+\setCJKmainfont [BoldFont=Songti~SC~Bold, AutoFakeSlant] {Songti~SC}
+\setCJKsansfont [AutoFakeBold=2.5] {PingFang~SC}
+\setCJKmonofont [AutoFakeBold=2.5, AutoFakeSlant] {STFangsong}
+\newCJKfontfamily \songti   [BoldFont=Songti~SC~Bold, AutoFakeSlant] {Songti~SC}
+\newCJKfontfamily \heiti    [AutoFakeBold=2.5] {PingFang~SC}
+\IfFontExistsTF {Kaiti~SC}
+  { \newCJKfontfamily \kaishu {Kaiti~SC} }
+  { \newCJKfontfamily \kaishu [AutoFakeSlant] {Songti~SC} }
+\newCJKfontfamily \fangsong [AutoFakeBold=2.5, AutoFakeSlant] {STFangsong}
+\IfFontExistsTF {Times~New~Roman}
+  { \setmainfont {Times~New~Roman} }
+  { \setmainfont {Times} }
+\endinput
